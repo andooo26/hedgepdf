@@ -57,7 +57,7 @@ exportButton.addEventListener("click", async () => {
           body {
             font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif !important;
             font-size: 14px !important;
-            line-height: 1.8;
+            line-height: 1.7;
             color: #333;
             background: #fff;
             padding: 20px;
@@ -78,11 +78,11 @@ exportButton.addEventListener("click", async () => {
           h4 { font-size: 1.1em; }
           p {
             font-size: 14px !important;
-            margin-bottom: 1em;
+            margin-bottom: 1.1em;
           }
           ul, ol {
             margin-left: 2em;
-            margin-bottom: 1em;
+            margin-bottom: 1.1em;
           }
           li {
             font-size: 14px !important;
@@ -236,6 +236,7 @@ exportButton.addEventListener("click", async () => {
     
     htmlElement.style.fontSize = '14px';
     bodyElement.style.fontSize = '14px';
+    bodyElement.style.lineHeight = '1.7';
     bodyElement.style.fontFamily = '"Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif';
     bodyElement.style.overflowWrap = 'break-word';
     bodyElement.style.wordWrap = 'break-word';
@@ -255,6 +256,23 @@ exportButton.addEventListener("click", async () => {
         el.style.overflowWrap = 'break-word';
         el.style.wordWrap = 'break-word';
       }
+    });
+    
+    const paragraphElements = bodyElement.querySelectorAll('p');
+    paragraphElements.forEach(p => {
+      p.style.lineHeight = '1.7';
+      p.style.marginBottom = '1.1em';
+    });
+    
+    const listElements = bodyElement.querySelectorAll('ul, ol');
+    listElements.forEach(list => {
+      list.style.marginBottom = '1.1em';
+    });
+    
+    const listItemElements = bodyElement.querySelectorAll('li');
+    listItemElements.forEach(li => {
+      li.style.marginBottom = '0.5em';
+      li.style.lineHeight = '1.7';
     });
     
     // 表のスタイルを適用
