@@ -76,15 +76,15 @@ document.getElementById("export").addEventListener("click", async () => {
           }
           code {
             font-family: "Courier New", "Monaco", "Consolas", monospace;
-            background-color: #f6f8fa;
+            background-color: #f5f5f5;
             padding: 2px 6px;
             border-radius: 3px;
             font-size: 0.9em;
-            border: 1px solid #e1e4e8;
-            color: #e83e8c;
+            border: 1px solid #dcdcdc;
+            color: #333333;
           }
           pre {
-            background-color: #f6f8fa;
+            background-color: #f5f5f5;
             padding: 16px;
             border-radius: 6px;
             overflow-x: auto;
@@ -92,8 +92,8 @@ document.getElementById("export").addEventListener("click", async () => {
             word-wrap: break-word;
             max-width: 100%;
             margin-bottom: 1em;
-            border: 1px solid #e1e4e8;
-            border-left: 4px solid #0366d6;
+            border: 1px solid #dcdcdc;
+            border-left: 4px solid #999999;
             box-sizing: border-box;
           }
           pre code {
@@ -105,14 +105,13 @@ document.getElementById("export").addEventListener("click", async () => {
           }
           blockquote {
             font-size: 14px !important;
-            border-left: 4px solid #dfe2e5;
-            background-color: #f6f8fa;
+            border-left: 4px solid #bfbfbf;
+            background-color: #f2f2f2;
             padding: 0 16px;
             margin-left: 0;
             margin-right: 0;
-            color: #6a737d;
+            color: #333;
             margin-bottom: 1em;
-            border-radius: 0 3px 3px 0;
             max-width: 100%;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -129,29 +128,23 @@ document.getElementById("export").addEventListener("click", async () => {
             width: auto;
             max-width: 100%;
             margin-bottom: 1em;
-            border: 1px solid #dfe2e5;
-            border-radius: 3px;
-            overflow: hidden;
+            border: 1px solid #bfbfbf;
             table-layout: auto;
+            background-color: #fff;
           }
           th, td {
             font-size: 14px !important;
-            border: 1px solid #dfe2e5;
-            padding: 10px 13px;
+            border: 1px solid #bfbfbf;
+            padding: 8px 12px;
             text-align: left;
             word-wrap: break-word;
             overflow-wrap: break-word;
           }
           th {
-            background-color: #f6f8fa;
-            font-weight: 700;
-            border-bottom: 2px solid #dfe2e5;
-          }
-          tr:nth-child(even) {
-            background-color: #fafbfc;
-          }
-          tr:hover {
-            background-color: #f1f3f5;
+            background-color: #f0f0f0;
+            font-weight: 600;
+            border-bottom: 1px solid #bfbfbf;
+            color: #222;
           }
           img {
             max-width: 100%;
@@ -159,7 +152,7 @@ document.getElementById("export").addEventListener("click", async () => {
             margin: 1em 0;
           }
           a {
-            color: #0066cc;
+            color: #222222;
             text-decoration: none;
           }
           a:hover {
@@ -244,9 +237,8 @@ document.getElementById("export").addEventListener("click", async () => {
         table.style.borderCollapse = 'collapse';
         table.style.maxWidth = '100%';
         table.style.marginBottom = '1em';
-        table.style.border = '1px solid #dfe2e5';
-        table.style.borderRadius = '3px';
-        table.style.overflow = 'hidden';
+        table.style.border = '1px solid #bfbfbf';
+        table.style.backgroundColor = '#ffffff';
         table.style.tableLayout = 'auto';
         table.style.boxSizing = 'border-box';
         
@@ -258,8 +250,8 @@ document.getElementById("export").addEventListener("click", async () => {
         const cells = table.querySelectorAll('th, td');
         cells.forEach(cell => {
           cell.style.fontSize = '14px';
-          cell.style.border = '1px solid #dfe2e5';
-          cell.style.padding = '10px 13px';
+          cell.style.border = '1px solid #bfbfbf';
+          cell.style.padding = '8px 12px';
           cell.style.textAlign = 'left';
           cell.style.boxSizing = 'border-box';
           cell.style.whiteSpace = 'nowrap';
@@ -344,10 +336,10 @@ document.getElementById("export").addEventListener("click", async () => {
         cell.style.fontSize = '14px';
       }
       if (!cell.style.border) {
-        cell.style.border = '1px solid #dfe2e5';
+        cell.style.border = '1px solid #bfbfbf';
       }
       if (!cell.style.padding) {
-        cell.style.padding = '10px 13px';
+        cell.style.padding = '8px 12px';
       }
       if (!cell.style.textAlign) {
         cell.style.textAlign = 'left';
@@ -360,33 +352,23 @@ document.getElementById("export").addEventListener("click", async () => {
     // 表の見出し行にスタイルを適用
     const tableHeaders = bodyElement.querySelectorAll('th');
     tableHeaders.forEach(th => {
-      th.style.backgroundColor = '#f6f8fa';
-      th.style.fontWeight = '700';
-      th.style.borderBottom = '2px solid #dfe2e5';
-    });
-    
-    // 表の偶数行に背景色を適用
-    tables.forEach(table => {
-      const rows = table.querySelectorAll('tr');
-      rows.forEach((row, index) => {
-        if (index % 2 === 1) {
-          row.style.backgroundColor = '#fafbfc';
-        }
-      });
+      th.style.backgroundColor = '#f0f0f0';
+      th.style.fontWeight = '600';
+      th.style.borderBottom = '1px solid #bfbfbf';
+      th.style.color = '#222222';
     });
     
     // 引用にスタイルを適用
     const blockquotes = bodyElement.querySelectorAll('blockquote');
     blockquotes.forEach(blockquote => {
       blockquote.style.fontSize = '14px';
-      blockquote.style.borderLeft = '4px solid #dfe2e5';
-      blockquote.style.backgroundColor = '#f6f8fa';
+      blockquote.style.borderLeft = '4px solid #bfbfbf';
+      blockquote.style.backgroundColor = '#f2f2f2';
       blockquote.style.padding = '0 16px';
       blockquote.style.marginLeft = '0';
       blockquote.style.marginRight = '0';
-      blockquote.style.color = '#6a737d';
+      blockquote.style.color = '#333333';
       blockquote.style.marginBottom = '1em';
-      blockquote.style.borderRadius = '0 3px 3px 0';
       blockquote.style.maxWidth = '100%';
       blockquote.style.wordWrap = 'break-word';
       blockquote.style.overflowWrap = 'break-word';
@@ -396,7 +378,7 @@ document.getElementById("export").addEventListener("click", async () => {
     // コードブロックにスタイルを適用
     const codeBlocks = bodyElement.querySelectorAll('pre');
     codeBlocks.forEach(pre => {
-      pre.style.backgroundColor = '#f6f8fa';
+      pre.style.backgroundColor = '#f5f5f5';
       pre.style.padding = '16px';
       pre.style.borderRadius = '6px';
       pre.style.overflowX = 'auto';
@@ -404,8 +386,8 @@ document.getElementById("export").addEventListener("click", async () => {
       pre.style.wordWrap = 'break-word';
       pre.style.maxWidth = '100%';
       pre.style.marginBottom = '1em';
-      pre.style.border = '1px solid #e1e4e8';
-      pre.style.borderLeft = '4px solid #0366d6';
+      pre.style.border = '1px solid #dcdcdc';
+      pre.style.borderLeft = '4px solid #999999';
       pre.style.boxSizing = 'border-box';
     });
     
@@ -413,12 +395,12 @@ document.getElementById("export").addEventListener("click", async () => {
     const inlineCodes = bodyElement.querySelectorAll('code:not(pre code)');
     inlineCodes.forEach(code => {
       code.style.fontFamily = '"Courier New", "Monaco", "Consolas", monospace';
-      code.style.backgroundColor = '#f6f8fa';
+      code.style.backgroundColor = '#f5f5f5';
       code.style.padding = '2px 6px';
       code.style.borderRadius = '3px';
       code.style.fontSize = '0.9em';
-      code.style.border = '1px solid #e1e4e8';
-      code.style.color = '#e83e8c';
+      code.style.border = '1px solid #dcdcdc';
+      code.style.color = '#333333';
     });
     
     // pre内のcodeは別
