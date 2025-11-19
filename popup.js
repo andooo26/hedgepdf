@@ -1,4 +1,13 @@
-document.getElementById("export").addEventListener("click", async () => {
+const exportButton = document.getElementById("export");
+let isProcessing = false;
+
+exportButton.addEventListener("click", async () => {
+  if (isProcessing) return;
+  isProcessing = true;
+  const originalText = exportButton.textContent;
+  exportButton.textContent = "PDFに変換中...";
+  exportButton.disabled = true;
+
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   const url = new URL(tab.url);
@@ -483,5 +492,9 @@ document.getElementById("export").addEventListener("click", async () => {
   } catch (error) {
     console.error('error:', error);
     alert('PDF変換に失敗: ' + error.message);
+  } finally {
+    exportButton.textContent = originalText;
+    exportButton.disabled = false;
+    isProcessing = false;
   }
 });
