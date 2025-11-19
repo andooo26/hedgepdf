@@ -127,7 +127,7 @@ document.getElementById("export").addEventListener("click", async () => {
       </html>
     `;
 
-    // iframeを用いてHTML
+    // iframeを作成してHTMLを表示
     const iframe = document.createElement('iframe');
     iframe.style.position = 'fixed';
     iframe.style.left = '-9999px';
@@ -147,55 +147,40 @@ document.getElementById("export").addEventListener("click", async () => {
     });
 
     // フォントの読み込み
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    // html2canvasで画像化
-    const canvas = await html2canvas(iframe.contentDocument.body, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#ffffff',
-      width: 800,
-      windowWidth: 800,
-    });
+    // html2pdf.jsでPDF化
+    const element = iframe.contentDocument.body;
+    
+    const opt = {
+      margin: [10, 10, 10, 10],
+      filename: `${noteid || 'document'}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { 
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        windowWidth: 800,
+      },
+      jsPDF: { 
+        unit: 'mm', 
+        format: 'a4', 
+        orientation: 'portrait',
+        compress: true,
+      },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
 
-    // jsPDFでPDF化
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4',
-    });
+    await html2pdf().set(opt).from(element).save();
 
-    const imgData = canvas.toDataURL('image/png');
-    // A4サイズ
-    const imgWidth = 210;
-    const pageHeight = 297;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    // 最初のページを追加
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    // 複数ページに対応
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-
-    // PDFをダウンロード
-    pdf.save(`${noteid || 'document'}.pdf`);
-
-    // クリーンアップ
-    document.body.removeChild(iframe);
-    URL.revokeObjectURL(blobUrl);
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+      URL.revokeObjectURL(blobUrl);
+    }, 1000);
 
   } catch (error) {
-    console.error('PDF変換エラー:', error);
-    alert('PDF変換に失敗しました: ' + error.message);
+    console.error('error:', error);
+    alert('PDF変換に失敗: ' + error.message);
   }
 });
