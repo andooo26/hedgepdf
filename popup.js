@@ -160,11 +160,21 @@ document.getElementById("export").addEventListener("click", async () => {
             margin: 1em 0;
           }
           a {
-            color: #222222;
+            color: #1f6ad6;
             text-decoration: none;
+            outline: none;
+            border: none;
+          }
+          a:visited,
+          a:active,
+          a:focus {
+            color: #1f6ad6;
+            outline: none;
+            border: none;
           }
           a:hover {
             text-decoration: underline;
+            text-decoration-color: #1f6ad6;
           }
           hr {
             border: none;
@@ -409,6 +419,15 @@ document.getElementById("export").addEventListener("click", async () => {
       code.style.fontSize = '0.9em';
       code.style.border = '1px solid #dcdcdc';
       code.style.color = '#333333';
+    });
+    
+    // リンクにスタイルを適用
+    const links = bodyElement.querySelectorAll('a');
+    links.forEach(link => {
+      link.style.color = '#1f6ad6';
+      link.style.textDecoration = 'none';
+      link.style.outline = 'none';
+      link.style.border = 'none';
     });
     
     // pre内のcodeは別
