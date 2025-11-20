@@ -1,6 +1,10 @@
+// ボタン
 const exportButton = document.getElementById("export");
+const downloadButton = document.getElementById("download");
 let isProcessing = false;
+let isDownloading = false;
 
+// PDFダウンロード
 exportButton.addEventListener("click", async () => {
   if (isProcessing) return;
   isProcessing = true;
@@ -531,5 +535,34 @@ exportButton.addEventListener("click", async () => {
     exportButton.textContent = originalText;
     exportButton.disabled = false;
     isProcessing = false;
+  }
+});
+
+// Markdownダウンロード
+downloadButton.addEventListener("click", async () => {
+  if (isDownloading) return;
+  isDownloading = true;
+  const originalText = downloadButton.textContent;
+  downloadButton.textContent = "ダウンロード中...";
+  downloadButton.disabled = true;
+
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const apiUrl = `${tab.url}/download`;
+
+    const a = document.createElement('a');
+    a.href = apiUrl;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+  } catch (error) {
+    console.error('error:', error);
+    alert('Markdownダウンロードに失敗: ' + error.message);
+  } finally {
+    downloadButton.textContent = originalText;
+    downloadButton.disabled = false;
+    isDownloading = false;
   }
 });

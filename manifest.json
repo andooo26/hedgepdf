@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "HedgePDF",
   "version": "1.0",
+  "description": "HedgeDocのドキュメントをPDF化してDLする拡張機能",
   "permissions": [
     "activeTab",
     "scripting",
